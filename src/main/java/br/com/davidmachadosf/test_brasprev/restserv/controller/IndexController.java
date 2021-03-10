@@ -23,7 +23,7 @@ public class IndexController {
 	@GetMapping
 	@RequestMapping(value ="/sucks")
 	public String sucks() {
-    	return "Github sucks... >:-(";
+    	return "Github sucks... ";
 	}
 
 }
