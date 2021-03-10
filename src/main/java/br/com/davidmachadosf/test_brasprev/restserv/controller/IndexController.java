@@ -19,5 +19,11 @@ public class IndexController {
 	public String bye() {
     	return "Bye bye, cruel world... :-(";
 	}
+	
+	@GetMapping
+	@RequestMapping(value ="/sucks")
+	public String sucks() {
+    	return "Github sucks... >:-(";
+	}
 
 }
