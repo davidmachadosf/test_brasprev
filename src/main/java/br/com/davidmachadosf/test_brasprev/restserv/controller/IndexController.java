@@ -11,7 +11,7 @@ public class IndexController {
 	@GetMapping
 	@RequestMapping(value ="/hello")
 	public String hello() {
-    	return "Hello world!! :-D";
+    	return "Hello world!! :-D UAU!!!";
 	}
 	
 	@GetMapping
