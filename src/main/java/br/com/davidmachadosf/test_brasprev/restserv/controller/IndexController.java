@@ -17,7 +17,7 @@ public class IndexController {
 	@GetMapping
 	@RequestMapping(value ="/bye")
 	public String bye() {
-    	return "Bye bye cruel world... :-(";
+    	return "Bye bye, cruel world... :-(";
 	}
 
 }
