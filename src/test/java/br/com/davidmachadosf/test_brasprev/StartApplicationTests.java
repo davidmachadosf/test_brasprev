@@ -1,10 +1,10 @@
-package br.com.davidmachadosf.test_brasprev.restserv;
+package br.com.davidmachadosf.test_brasprev;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestservApplicationTests {
+class StartApplicationTests {
 
 	@Test
 	void contextLoads() {

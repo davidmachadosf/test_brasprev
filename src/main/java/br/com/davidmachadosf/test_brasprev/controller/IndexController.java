@@ -1,4 +1,4 @@
-package br.com.davidmachadosf.test_brasprev.restserv.controller;
+package br.com.davidmachadosf.test_brasprev.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.davidmachadosf.test_brasprev</groupId>
-	<artifactId>restserv</artifactId>
+	<artifactId>test_brasprev</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>restserv</name>
+	<name>test_brasprev</name>
 	<description>Servidor REST do teste BrasPrev</description>
 	<properties>
 		<java.version>1.8</java.version>

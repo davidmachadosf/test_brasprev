@@ -1,14 +1,14 @@
-package br.com.davidmachadosf.test_brasprev.restserv;
+package br.com.davidmachadosf.test_brasprev;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RestservApplication {
+public class StartApplication {
 
 	/* primeiro deploy no docker */
 	public static void main(String[] args) {
-		SpringApplication.run(RestservApplication.class, args);
+		SpringApplication.run(StartApplication.class, args);
 	}
 
 }
