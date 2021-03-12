@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Usuários</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+    <body>
+        <h2>Lista dos Usuários</h2>
+
+        <table border=1>
+            <tr>
+                <th>Login</th>
+                <th>Hash</th>
+                <th>Nível de Acesso</th>
+            </tr>
+            
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.login}">Login</td>
+                <td th:text="${usuario.hash}">Hash</td>
+                <td th:text="${usuario.nivel}">Nível de Acesso</td>                
+            </tr>
+        </table>
+
+    </body>
+</html>
