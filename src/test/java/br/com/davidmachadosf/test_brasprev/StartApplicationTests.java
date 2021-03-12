@@ -1,12 +1,12 @@
 package br.com.davidmachadosf.test_brasprev;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@  SpringBootTest
 class StartApplicationTests {
 
-	@Test
+	//@  Test
 	void contextLoads() {
 	}
 
