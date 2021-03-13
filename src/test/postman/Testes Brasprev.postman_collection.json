@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "e21ca7d0-b113-4a2c-8439-59b7295b88b7",
+		"name": "Testes Brasprev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Teste do Deploy",
+			"item": [
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "Status da Aplicação (/health)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actuator/health",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actuator",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ambiente da Aplicação (/env)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/actuator/env",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"actuator",
+										"env"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Database",
+					"item": [
+						{
+							"name": "Página index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}",
+									"host": [
+										"{{host}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tabela de usuarios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/showUsuarios",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"showUsuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Tabela de clientes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/showClientes",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"showClientes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Serviços básicos para teste",
+					"item": [
+						{
+							"name": "Hello World!!",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/hello",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"hello"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Data e hora",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/now",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"now"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Somando",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/add?a=2&b=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"add"
+									],
+									"query": [
+										{
+											"key": "a",
+											"value": "2"
+										},
+										{
+											"key": "b",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Multiplicando",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/mult?a=11&b=12",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"mult"
+									],
+									"query": [
+										{
+											"key": "a",
+											"value": "11"
+										},
+										{
+											"key": "b",
+											"value": "12"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Bye bye...",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/hello",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"hello"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Consultas",
+					"item": [
+						{
+							"name": "Lista consultas disponíveis",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/usuarios/search/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"usuarios",
+										"search",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Consultas",
+					"item": [
+						{
+							"name": "Lista consultas disponíveis",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/clientes/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clientes",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta cliente por CPF",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/clientes/00000000005",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clientes",
+										"00000000005"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta nome pelo CPF",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/clientes/search/findNomeByCpf?cpf=00000000003",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clientes",
+										"search",
+										"findNomeByCpf"
+									],
+									"query": [
+										{
+											"key": "cpf",
+											"value": "00000000003"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta clientes homônimos pelo nome",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/clientes/search/findByNomeOrderByNome?busca=Chica",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clientes",
+										"search",
+										"findByNomeOrderByNome"
+									],
+									"query": [
+										{
+											"key": "busca",
+											"value": "Chica"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta clientes por parte do nome",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/clientes/search/findByNomeContainingOrderByNome?busca=Zé",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clientes",
+										"search",
+										"findByNomeContainingOrderByNome"
+									],
+									"query": [
+										{
+											"key": "busca",
+											"value": "Zé"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
