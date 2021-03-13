@@ -33,7 +33,7 @@ public interface ClienteRepository extends PagingAndSortingRepository<Cliente, S
      * @return cliente do id passado como parâmetro.
      */
     @Query("SELECT c.nome FROM Cliente c where c.cpf = :cpf")
-  Cliente findNomeByCpf(@Param("cpf") Long cpf);
+  Cliente findNomeByCpf(@Param("cpf") String cpf);
 
     /**
      * Método que retorna uma lista de clientes fazendo a busca pelo nome passado
@@ -43,5 +43,7 @@ public interface ClienteRepository extends PagingAndSortingRepository<Cliente, S
      * @return lista de clientes
      */
     List<Cliente> findByNomeOrderByNome(@Param("nome") String nome);
+    
+    List<Cliente> findByNomeContainingOrderByNomeDesc(@Param("nome") String nome);
 
 }
