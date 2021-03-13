@@ -9,19 +9,20 @@ import org.springframework.stereotype.Repository;
 
 import br.com.davidmachadosf.test_brasprev.model.Cliente;
 
+
 @Repository
 @RepositoryRestResource(collectionResourceRel = "clientes", path = "clientes")
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, String> {
 	
 	String findNomeByCpf(@Param("cpf") String cpf);
 	
-	List<Cliente> findByNome(@Param("nome") String nome);
-    List<Cliente> findByNomeContainingOrderByNome(@Param("busca") String busca);
+	List<Cliente> findByNomeIgnoreCase(@Param("nome") String nome);
+    String        findByNomeContainingIgnoreCaseOrderByNome(@Param("busca") String busca);
     
-	List<Cliente> findByLogradouroContainingOrderByLogradouro(@Param("busca") String busca);
-	List<Cliente> findByBairroContainingOrderByBairro(@Param("busca") String busca);
-	List<Cliente> findByCidadeContainingOrderByCidade(@Param("busca") String busca);
-	List<Cliente> findByEstadoIgnoreCaseOrderByEstado(@Param("uf") String uf);
-	List<Cliente> findByCepOrderByCep(@Param("cep") String cep);
+	List<Cliente> findByLogradouroContainingIgnoreCaseOrderByLogradouro(@Param("busca") String busca);
+	List<Cliente> findByBairroContainingIgnoreCaseOrderByBairro(@Param("busca") String busca);
+	List<Cliente> findByCidadeContainingIgnoreCaseOrderByCidade(@Param("busca") String busca);
+	List<Cliente> findByEstadoIgnoreCase(@Param("uf") String uf);
+	List<Cliente> findByCep(@Param("cep") String cep);
 
 }

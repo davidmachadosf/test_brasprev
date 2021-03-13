@@ -9,7 +9,7 @@
 			"name": "Teste do Deploy",
 			"item": [
 				{
-					"name": "Actuator",
+					"name": "Testes do Actuator",
 					"item": [
 						{
 							"name": "Status da Aplicação (/health)",
@@ -50,7 +50,7 @@
 					]
 				},
 				{
-					"name": "Database",
+					"name": "Verificando Database",
 					"item": [
 						{
 							"name": "Página index",
@@ -172,7 +172,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{host}}/mult?a=11&b=12",
+									"raw": "{{host}}/mult?a=1123&b=1224",
 									"host": [
 										"{{host}}"
 									],
@@ -182,11 +182,11 @@
 									"query": [
 										{
 											"key": "a",
-											"value": "11"
+											"value": "1123"
 										},
 										{
 											"key": "b",
-											"value": "12"
+											"value": "1224"
 										}
 									]
 								}
@@ -199,12 +199,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{host}}/hello",
+									"raw": "{{host}}/bye",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"hello"
+										"bye"
 									]
 								}
 							},
@@ -234,6 +234,34 @@
 										"usuarios",
 										"search",
 										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta usuários por nivel de acesso",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://test-brasprev.herokuapp.com/usuarios/search/findByNivel?nivel=2",
+									"protocol": "https",
+									"host": [
+										"test-brasprev",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"usuarios",
+										"search",
+										"findByNivel"
+									],
+									"query": [
+										{
+											"key": "nivel",
+											"value": "2"
+										}
 									]
 								}
 							},
@@ -268,7 +296,7 @@
 							"response": []
 						},
 						{
-							"name": "Consulta cliente por CPF",
+							"name": "Consulta cliente pelo CPF",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -316,19 +344,19 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{host}}/clientes/search/findByNomeOrderByNome?busca=Chica",
+									"raw": "{{host}}/clientes/search/findByNomeIgnoreCase?nome=chica",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"clientes",
 										"search",
-										"findByNomeOrderByNome"
+										"findByNomeIgnoreCase"
 									],
 									"query": [
 										{
-											"key": "busca",
-											"value": "Chica"
+											"key": "nome",
+											"value": "chica"
 										}
 									]
 								}
@@ -341,19 +369,156 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{host}}/clientes/search/findByNomeContainingOrderByNome?busca=Zé",
+									"raw": "{{host}}/clientes/search/findByNomeContainingIgnoreCaseOrderByNome?busca=zé",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"clientes",
 										"search",
-										"findByNomeContainingOrderByNome"
+										"findByNomeContainingIgnoreCaseOrderByNome"
 									],
 									"query": [
 										{
 											"key": "busca",
-											"value": "Zé"
+											"value": "zé"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta clientes por parte do logradouro",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/clientes/search/findByLogradouroIgnoreCaseContainingOrderByLogradouro?busca=30",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"clientes",
+										"search",
+										"findByLogradouroIgnoreCaseContainingOrderByLogradouro"
+									],
+									"query": [
+										{
+											"key": "busca",
+											"value": "30"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta clientes por parte do bairro",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByBairroIgnoreCaseContainingOrderByBairro?busca=vila",
+									"protocol": "https",
+									"host": [
+										"test-brasprev",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"clientes",
+										"search",
+										"findByBairroIgnoreCaseContainingOrderByBairro"
+									],
+									"query": [
+										{
+											"key": "busca",
+											"value": "vila"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta clientes por parte da cidade",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByCidadeIgnoreCaseContainingOrderByCidade?busca=au",
+									"protocol": "https",
+									"host": [
+										"test-brasprev",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"clientes",
+										"search",
+										"findByCidadeIgnoreCaseContainingOrderByCidade"
+									],
+									"query": [
+										{
+											"key": "busca",
+											"value": "au"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta clientes por estado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByEstadoIgnoreCase?uf=ac",
+									"protocol": "https",
+									"host": [
+										"test-brasprev",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"clientes",
+										"search",
+										"findByEstadoIgnoreCase"
+									],
+									"query": [
+										{
+											"key": "uf",
+											"value": "ac"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta clientes por CEP",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByCep?cep=05000-002",
+									"protocol": "https",
+									"host": [
+										"test-brasprev",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"clientes",
+										"search",
+										"findByCep"
+									],
+									"query": [
+										{
+											"key": "cep",
+											"value": "05000-002"
 										}
 									]
 								}
