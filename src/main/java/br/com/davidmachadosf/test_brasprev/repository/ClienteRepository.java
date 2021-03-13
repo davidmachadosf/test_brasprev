@@ -18,7 +18,7 @@ public interface ClienteRepository extends PagingAndSortingRepository<Cliente, S
 	List<Cliente> findByNome(@Param("nome") String nome);
     List<Cliente> findByNomeContainingOrderByNome(@Param("busca") String busca);
     
-	List<Cliente> findByLogradouroContainingOrderByLogragouro(@Param("busca") String busca);
+	List<Cliente> findByLogradouroContainingOrderByLogradouro(@Param("busca") String busca);
 	List<Cliente> findByBairroContainingOrderByBairro(@Param("busca") String busca);
 	List<Cliente> findByCidadeContainingOrderByCidade(@Param("busca") String busca);
 	List<Cliente> findByEstadoIgnoreCaseOrderByEstado(@Param("uf") String uf);
