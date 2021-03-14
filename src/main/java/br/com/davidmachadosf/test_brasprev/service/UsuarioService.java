@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.davidmachadosf.test_brasprev.model.Usuario;
 import br.com.davidmachadosf.test_brasprev.repository.UsuarioRepository;
@@ -13,6 +15,7 @@ import utils.PasswordUtils;
 
 
 @Service
+@RestController
 public class UsuarioService implements IUsuarioService {
 
     @Autowired
@@ -23,7 +26,7 @@ public class UsuarioService implements IUsuarioService {
         return (List<Usuario>) repository.findAll();
     }
     
-    @PatchMapping("/usuarios/alterasenha/{login}/{novaSenha}")
+    @PatchMapping("/alterasenha/{login}/{novaSenha}")
     public Usuario alteraSenha(@PathVariable String login, @PathVariable String novaSenha) {
         Usuario usuario = repository.getByLogin(login);
         usuario.setHash(PasswordUtils.geraHashNovoParaSenha(novaSenha));
@@ -31,7 +34,7 @@ public class UsuarioService implements IUsuarioService {
     	return usuario;
     }
     
-    @PatchMapping("/usuarios/verificasenha/{login}/{senha}")
+    @GetMapping("/verificasenha/{login}/{senha}")
     public Boolean verificaSenha(@PathVariable String login, @PathVariable String senha) {
         Usuario usuario = repository.getByLogin(login);
         String hashAtual = usuario.getHash();
