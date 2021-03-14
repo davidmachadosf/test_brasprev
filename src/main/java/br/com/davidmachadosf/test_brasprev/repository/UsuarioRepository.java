@@ -13,6 +13,8 @@ import br.com.davidmachadosf.test_brasprev.model.Usuario;
 @RepositoryRestResource(collectionResourceRel = "usuarios", path = "usuarios")
 public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, String> {
 	
+	Usuario  getByLogin(String login);
+	
 	List<Usuario> findByNivel(@Param("nivel") int nivel);
 
 }

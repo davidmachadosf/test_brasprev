@@ -268,6 +268,143 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Insere ou substitui usuário pelo login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\":\"ze001\",\r\n    \"nivel\": 5,\r\n    \"hash\": \"12121212\"     \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/ze001",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"ze001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera nível de acesso do usuário",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nivel\": \"666\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/u001",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"u001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera hash da senha do usuário",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hash\": \"237657325275576\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/u001",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"u001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera senha do usuário",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hash\": \"237657325275576\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/alterasenha/cad01/abracadabra",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"alterasenha",
+								"cad01",
+								"abracadabra"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -394,14 +531,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{host}}/clientes/search/findByLogradouroIgnoreCaseContainingOrderByLogradouro?busca=30",
+									"raw": "{{host}}/clientes/search/findByLogradouroContainingIgnoreCaseOrderByLogradouro?busca=30",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"clientes",
 										"search",
-										"findByLogradouroIgnoreCaseContainingOrderByLogradouro"
+										"findByLogradouroContainingIgnoreCaseOrderByLogradouro"
 									],
 									"query": [
 										{
@@ -419,7 +556,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByBairroIgnoreCaseContainingOrderByBairro?busca=vila",
+									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByBairroContainingIgnoreCaseOrderByBairro?busca=vila",
 									"protocol": "https",
 									"host": [
 										"test-brasprev",
@@ -429,7 +566,7 @@
 									"path": [
 										"clientes",
 										"search",
-										"findByBairroIgnoreCaseContainingOrderByBairro"
+										"findByBairroContainingIgnoreCaseOrderByBairro"
 									],
 									"query": [
 										{
@@ -447,7 +584,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByCidadeIgnoreCaseContainingOrderByCidade?busca=au",
+									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByCidadeContainingIgnoreCaseOrderByCidade?busca=au",
 									"protocol": "https",
 									"host": [
 										"test-brasprev",
@@ -457,7 +594,7 @@
 									"path": [
 										"clientes",
 										"search",
-										"findByCidadeIgnoreCaseContainingOrderByCidade"
+										"findByCidadeContainingIgnoreCaseOrderByCidade"
 									],
 									"query": [
 										{
@@ -475,7 +612,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByEstadoIgnoreCase?uf=ac",
+									"raw": "https://test-brasprev.herokuapp.com/clientes/search/findByEstadoIgnoreCase?uf=am",
 									"protocol": "https",
 									"host": [
 										"test-brasprev",
@@ -490,7 +627,7 @@
 									"query": [
 										{
 											"key": "uf",
-											"value": "ac"
+											"value": "am"
 										}
 									]
 								}
@@ -526,6 +663,59 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Insere ou substitui cliente pelo CPF",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"12312312300\",\r\n    \"nome\": \"Zé 0555\",\r\n    \"logradouro\": \"Rua Comprida, 300000\",\r\n    \"bairro\": \"Vila Sézamo\",\r\n    \"cidade\": \"Taubaté\",\r\n    \"estado\": \"SP\",\r\n    \"cep\": \"05000-002\"\r\n}    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clientes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clientes/12312312300",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clientes",
+								"12312312300"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

@@ -14,10 +14,10 @@ import br.com.davidmachadosf.test_brasprev.model.Cliente;
 @RepositoryRestResource(collectionResourceRel = "clientes", path = "clientes")
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, String> {
 	
-	String findNomeByCpf(@Param("cpf") String cpf);
+	Cliente findNomeByCpf(@Param("cpf") String cpf);
 	
 	List<Cliente> findByNomeIgnoreCase(@Param("nome") String nome);
-    String        findByNomeContainingIgnoreCaseOrderByNome(@Param("busca") String busca);
+	List<Cliente> findByNomeContainingIgnoreCaseOrderByNome(@Param("busca") String busca);
     
 	List<Cliente> findByLogradouroContainingIgnoreCaseOrderByLogradouro(@Param("busca") String busca);
 	List<Cliente> findByBairroContainingIgnoreCaseOrderByBairro(@Param("busca") String busca);
