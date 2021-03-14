@@ -245,12 +245,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://test-brasprev.herokuapp.com/usuarios/search/getByLogin?login=admin",
-									"protocol": "https",
+									"raw": "{{host}}/usuarios/search/getByLogin?login=admin",
 									"host": [
-										"test-brasprev",
-										"herokuapp",
-										"com"
+										"{{host}}"
 									],
 									"path": [
 										"usuarios",
@@ -268,27 +265,24 @@
 							"response": []
 						},
 						{
-							"name": "Consulta usuários por nivel de acesso",
+							"name": "Consulta usuários por autorização de acesso",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://test-brasprev.herokuapp.com/usuarios/search/findByNivel?nivel=2",
-									"protocol": "https",
+									"raw": "{{host}}/usuarios/search/findByRolesContainingIgnoreCase?role=view",
 									"host": [
-										"test-brasprev",
-										"herokuapp",
-										"com"
+										"{{host}}"
 									],
 									"path": [
 										"usuarios",
 										"search",
-										"findByNivel"
+										"findByRolesContainingIgnoreCase"
 									],
 									"query": [
 										{
-											"key": "nivel",
-											"value": "2"
+											"key": "role",
+											"value": "view"
 										}
 									]
 								}
@@ -304,7 +298,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"login\":\"ze001\",\r\n    \"nivel\": 5,\r\n    \"hash\": \"12121212\"     \r\n}",
+							"raw": "{\r\n    \"login\": \"ze001\",\r\n    \"roles\": \"EDIT,VIEW\",\r\n    \"hash\": \"12121212\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -352,13 +346,13 @@
 					"response": []
 				},
 				{
-					"name": "Altera nível de acesso do usuário",
+					"name": "Altera autorizaçoes de acesso do usuário",
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nivel\": \"666\"\r\n}",
+							"raw": "{\r\n    \"roles\": \"ADMIN,VIEW\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -366,13 +360,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/usuarios/u001",
+							"raw": "{{host}}/usuarios/user01",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"usuarios",
-								"u001"
+								"user01"
 							]
 						}
 					},
@@ -393,13 +387,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/usuarios/u001",
+							"raw": "{{host}}/usuarios/user01",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"usuarios",
-								"u001"
+								"user01"
 							]
 						}
 					},
@@ -420,13 +414,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/alterasenha/cad01/abretesézamo",
+							"raw": "{{host}}/alterasenha/edit01/abretesézamo",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"alterasenha",
-								"cad01",
+								"edit01",
 								"abretesézamo"
 							]
 						}
@@ -451,13 +445,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/verificasenha/cad01/abracadabra",
+							"raw": "{{host}}/verificasenha/edit01/abracadabra",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"verificasenha",
-								"cad01",
+								"edit01",
 								"abracadabra"
 							]
 						}
@@ -465,7 +459,7 @@
 					"response": []
 				},
 				{
-					"name": "Verifica senha correta do usuário Copy",
+					"name": "Verifica senha correta do usuário",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -482,14 +476,76 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/verificasenha/cad01/abratesézamo",
+							"raw": "{{host}}/verificasenha/edit01/abretesézamo",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"verificasenha",
-								"cad01",
-								"abratesézamo"
+								"edit01",
+								"abretesézamo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtém token de acesso - fracasso",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/edirt01/estouchutandoumasenha",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"edirt01",
+								"estouchutandoumasenha"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtém token de acesso - sucesso",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/god/abracadabra",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"god",
+								"abracadabra"
 							]
 						}
 					},
@@ -834,6 +890,41 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "asdasdasdasdasdasdasd",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

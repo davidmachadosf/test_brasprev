@@ -24,28 +24,21 @@ public class PasswordUtils {
 	private static long HORAS = 60*MINUTOS;
 	private static long DIAS = 24*HORAS;
 	private static long SEMANAS = 7*DIAS;
-	//private static long expires = 2*DIAS;
 	
 	// tokens de autenticação expiram em 2 horas e meia
 	private static long expiresDuration = 2*HORAS + 30*MINUTOS;		
 	private static String chave = "secret$key";
 	
-	// autenticação de login/senha
-	//public static void auth(String login, String senha, String... roles) {
-	//	SecurityContextHolder.getContext().setAuthentication(
-	//		new UsernamePasswordAuthenticationToken(login, senha, AuthorityUtils.createAuthorityList(roles)));
-	//}
-	
 	// gera token de autenticação com data de expiração
 	public static String geraToken(String login, String senha) throws Exception{		
 		long agora = (new Date()).getTime();
 		return 
-		"{ 'Authorization' : '" +
+		"{\n  \"Authorization\": \"" +
 			encrypt(
 				encodeBase64String(login)+":"+
 				encodeBase64String(senha)+":"+
 				encodeBase64String(""+(agora+expiresDuration)), chave) +
-		"'; }";
+		"\"\n}";
 	}
 
 	public static void verificaToken(UsuarioRepository repository, String token, List<String> callerRoles, String loginParam) throws Exception {		
@@ -66,7 +59,7 @@ public class PasswordUtils {
 		try{
 			Usuario usuario = repository.getByLogin(login);
 		    String hashAtual = usuario.getHash();
-	        String[]roles = new String[]{""+usuario.getNivel()};
+	        String[]roles = usuario.getRoles().split(",");
 	        
 	        // verifica se senha fornecida está correta
 	        if(!verificaSenha(hashAtual, senha)) {
@@ -74,7 +67,7 @@ public class PasswordUtils {
 			}
 	        
 	        // uma das exigências do serviço é que o usuário só possa mudar dados dele próprio? (ex.: troca de senha)
-	        if(callerRoles.contains("OWNER") && loginParam.equals(login)) return;
+	        if(callerRoles.contains(Role.OWNER.toString()) && loginParam.equals(login)) return;
 	       
 	        // papel do usuário está na lista de papéis que podem acessar o serviço?
 	        for(String role:roles) {
@@ -150,7 +143,7 @@ public class PasswordUtils {
 			Cipher cipher=Cipher.getInstance("Blowfish");
 			cipher.init(Cipher.ENCRYPT_MODE, skeyspec);
 			byte[] encrypted=cipher.doFinal(strClearText.getBytes());
-			strData=new String(encrypted);
+			strData=encodeBase64(encrypted);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,7 +160,7 @@ public class PasswordUtils {
 			SecretKeySpec skeyspec=new SecretKeySpec(strKey.getBytes(),"Blowfish");
 			Cipher cipher=Cipher.getInstance("Blowfish");
 			cipher.init(Cipher.DECRYPT_MODE, skeyspec);
-			byte[] decrypted=cipher.doFinal(strEncrypted.getBytes());
+			byte[] decrypted=cipher.doFinal(decodeBase64(strEncrypted));
 			strData=new String(decrypted);
 			
 		} catch (Exception e) {

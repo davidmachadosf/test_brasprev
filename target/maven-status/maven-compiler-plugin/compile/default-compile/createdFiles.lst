@@ -7,6 +7,7 @@ br\com\davidmachadosf\test_brasprev\service\UsuarioService.class
 br\com\davidmachadosf\test_brasprev\service\IClienteService.class
 br\com\davidmachadosf\test_brasprev\service\ClienteService.class
 utils\PasswordUtils.class
+utils\Role.class
 br\com\davidmachadosf\test_brasprev\controller\IndexController.class
 br\com\davidmachadosf\test_brasprev\controller\CadastroController.class
 br\com\davidmachadosf\test_brasprev\StartApplication.class

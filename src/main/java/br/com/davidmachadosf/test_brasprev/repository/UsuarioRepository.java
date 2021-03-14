@@ -15,6 +15,6 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, S
 	
 	Usuario  getByLogin(String login);
 	
-	List<Usuario> findByNivel(@Param("nivel") int nivel);
+	List<Usuario> findByRolesContainingIgnoreCase(@Param("role") String role);
 
 }

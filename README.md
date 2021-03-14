@@ -75,7 +75,7 @@ VISUALIZADOR:
 ## Serviços de inclusão 
 
 ### usuarios
-  * post (login, senha, nivel)
+  * post (login, senha, roles)
 
 ### clientes
    * post (cpf,nome, endereço(log, bairro,cidade, estado cep))
@@ -85,7 +85,7 @@ VISUALIZADOR:
 ### usuarios
   * senha: post (login, senha)
   
-  * nivel de acesso: post (login, nivel)
+  * autorizações (roles) de acesso: post (login, roles)
 
 ### clientes
   * post (cpf,nome, endereço(log, bairro,cidade, estado cep))  

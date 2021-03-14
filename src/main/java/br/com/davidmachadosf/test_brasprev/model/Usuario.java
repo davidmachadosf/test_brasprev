@@ -13,6 +13,6 @@ public class Usuario {
 	
     @Id
     String login;  // login do usuário (chave)
+    String roles;  // permissões de acesso, separadas por vírgula   
 	String hash;   // hash da senha de usuário
-    int nivel;     // nivel de acesso (0:admin)
 }
