@@ -1,10 +1,13 @@
 -- administrador
-INSERT INTO tb01_usuarios(login, hash, nivel) VALUES('admin', '9238792729347234987', 0);
+INSERT INTO tb01_usuarios(login, hash, nivel) VALUES('admin', '6jOp0qs0q+h3pGq7yQGNrA==:ChYIe0KpYRY+/sQgB29kfwHaL6F39uwvYWs8q9243xfK3OE1Do43SBW4osEYeUY/0ciOkZAxBYKCcMK6Z7g0lg==', 0);
 -- cadastradores de clientes
-INSERT INTO tb01_usuarios(login, hash, nivel) VALUES('cad01', '9238792729347234987', 1);
+INSERT INTO tb01_usuarios(login, hash, nivel) VALUES('cad01', '6jOp0qs0q+h3pGq7yQGNrA==:ChYIe0KpYRY+/sQgB29kfwHaL6F39uwvYWs8q9243xfK3OE1Do43SBW4osEYeUY/0ciOkZAxBYKCcMK6Z7g0lg==', 1);
 -- usuários com permissão de consultar clientes
-INSERT INTO tb01_usuarios(login, hash, nivel) VALUES('u001',  '9238792729347234987', 2);
-INSERT INTO tb01_usuarios(login, hash, nivel) VALUES('u002',  '9238792729347234987', 2);
+INSERT INTO tb01_usuarios(login, hash, nivel) VALUES('u001',  '6jOp0qs0q+h3pGq7yQGNrA==:ChYIe0KpYRY+/sQgB29kfwHaL6F39uwvYWs8q9243xfK3OE1Do43SBW4osEYeUY/0ciOkZAxBYKCcMK6Z7g0lg==', 2);
+INSERT INTO tb01_usuarios(login, hash, nivel) VALUES('u002',  '6jOp0qs0q+h3pGq7yQGNrA==:ChYIe0KpYRY+/sQgB29kfwHaL6F39uwvYWs8q9243xfK3OE1Do43SBW4osEYeUY/0ciOkZAxBYKCcMK6Z7g0lg==', 2);
+-- OBS.: o hash default corresponde à senha incial "abracadabra", que pode ser alterada posteriormente
+
+
 
 -- insere alguns clientes iniciais para testes de desenvolvimento
 INSERT INTO tb02_clientes(cpf,nome,logradouro,bairro,cidade,estado,cep) VALUES('00000000001','Zé 01','Rua Comprida, 100000','Vila Sézamo',    'São Paulo', 'SP','05000-001');

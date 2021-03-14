@@ -420,15 +420,76 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/usuarios/alterasenha/cad01/abracadabra",
+							"raw": "{{host}}/alterasenha/cad01/abretesézamo",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"usuarios",
 								"alterasenha",
 								"cad01",
+								"abretesézamo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verifica senha errada do usuário",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/verificasenha/cad01/abracadabra",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"verificasenha",
+								"cad01",
 								"abracadabra"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verifica senha correta do usuário Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/verificasenha/cad01/abratesézamo",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"verificasenha",
+								"cad01",
+								"abratesézamo"
 							]
 						}
 					},

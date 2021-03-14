@@ -26,6 +26,11 @@ public class UsuarioService implements IUsuarioService {
         return (List<Usuario>) repository.findAll();
     }
     
+    @GetMapping("/auth/{login}/{senha}")
+    public String auth(@PathVariable String login, @PathVariable String senha) throws Exception {
+        return PasswordUtils.geraToken(login, senha);
+    }
+    
     @PatchMapping("/alterasenha/{login}/{novaSenha}")
     public Usuario alteraSenha(@PathVariable String login, @PathVariable String novaSenha) {
         Usuario usuario = repository.getByLogin(login);

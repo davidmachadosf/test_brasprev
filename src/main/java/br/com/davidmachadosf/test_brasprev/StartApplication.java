@@ -21,4 +21,5 @@ public class StartApplication implements RepositoryRestConfigurer {
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
         config.exposeIdsFor(Usuario.class, Cliente.class);
     }
+
 }
