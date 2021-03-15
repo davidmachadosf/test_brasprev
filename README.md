@@ -68,24 +68,24 @@ cep        | VARCHAR( 9) |
 As autorizações de acesso que podem ser atribuidas aos usuários são os seguintes:
 
 `ADMIN` tem permissão para:
-* cadastrar usuários novos
-* alterar a senha de qualquer usuário (incluindo sua própria)
-* alterar nome e autorizações de acess de acesso de usuários
-* deletar usuários
-* procurar e visualizar usuarios
+>* cadastrar usuários novos
+>* alterar a senha de qualquer usuário (incluindo sua própria)
+>* alterar nome e autorizações de acess de acesso de usuários
+>* deletar usuários
+>* procurar e visualizar usuarios
 
 `EDIT` tem permissão para:
-* alterar a própria senha 
-* cadastrar clientes novos
-* alterar dados clientes
-* deletar clientes 
+>* alterar a própria senha 
+>* cadastrar clientes novos
+>* alterar dados clientes
+>* deletar clientes 
 
 `VIEW` tem permissão para:
-* alterar a própria senha 
-* procurar e visualizar  clientes 
+>* alterar a própria senha 
+>* procurar e visualizar  clientes 
 
 `OWNER` tem permissão para:
-* indica que usuário só pode acessar o serviço se estiver alterando seus próprios dados
+>* indica que usuário só pode acessar o serviço se estiver alterando seus próprios dados
 
 
 
