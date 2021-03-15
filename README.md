@@ -1,5 +1,5 @@
 
-# test_brasprev
+# Teste Brasprev (OBS.: este documento ainda está sendo desenvolvido!)
 
 ## Código Fonte
 O código fonte da aplicação está disponibilizada no GitHub pelo link: 
@@ -7,17 +7,6 @@ O código fonte da aplicação está disponibilizada no GitHub pelo link:
 
 https://github.com/davidmachadosf/test_brasprev.git
 
-
-## Critérios de Mudança de Versões
-As versões da aplicação são marcadas com X.Y.Z, sendo X, Y e Z inteiros sequenciais começando em zero (exceto por Z, que sempre começa em 1).
-
-Os incrementos em Z indicam alterações que não afetam os testes anteriores nas versões X.Y.(Z-n), onde n>=1. Podem ser inclusões de documentação, comentários em código, ou melhorias e verificações em tempo de execução que, mesmo que importantes, não afetam os testes nas versões anteriores, que continuam funcionando.
-
-Os incrementos em Y indicam alterações importantes na aplicação, principalmente correções de bugs. Aplicações de versões X.Y.Z e X.(Y-1).* onde n>=1 se comportarão diferentes se os casos de teste utilizados estiverem relacionados ao bug corrigido. Mas não representam mudanças estruturais muito profundas na arquitetura da aplicação.
-
-Os incrementos em X indicam alterações MUITO importantes na aplicação, inclusive com incompatibilidade de testes em relação às versões (x-n).*.* onde onde n>=1... São incrementos importantes no projeto, como inclusão de recursos de criptografia, autenticação, incremento de domínios (tabelas a mais a serem administradas), etc... 
-
-Mas vale notar que no início do desenvolvimento, antes de ser apresentada a versão inicial 1.0.0, estas evoluções podem ocorrer ligeiramente mais lentas que esta proposta acima. Ou seja, embora alterações importantes possam acontecer entre as versões 0.2.* e 0.3.*, na versão X=0 elas ainda podem ser consideradas como desenvolvimento incompleto, e provavelmente são alterações mais importantes que aquelas sugeridas acima.
 
 
 ## Deploy
@@ -31,7 +20,7 @@ Uma verificação inicial no status da aplicação pode ser checada consultando 
 
 https://test-brasprev.herokuapp.com/actuator/health
 
-https://test-brasprev.herokuapp.com/environment...
+https://test-brasprev.herokuapp.com/actuator/env
 
 ## Auxílio de desenvolvimento
 Durante o desenvolvimento o conteúdo da base de dados pode ser verificado em:
@@ -60,29 +49,35 @@ clientes cadastrados no sistema pelos usuários habilitados para isto, con numer
 a estrutura desta tabela na base é a seguinte:
 
 
-## Niveis de acesso aos serviçosa
+## Autorizações de acesso aos serviços
 Os niveis de acesso que podem ser atribuitos aos usuários são os seguintes:
 
-ADMINISTRADOR: tem permissão para:
+ADMIN: tem permissão para:
 * cadastrar usuários novos
 * alterar a senha de qualquer usuário (incluindo sua própria)
 * alterar nome e niveis de acesso de usuários
 * deletar usuários
 OBS:como a senha nunca é gravada na base, o reset de senhas pode ser feito fornecendo uma senha nova ou deixando o sistema gerar uma aleatoria: recuperar uma senha esquecida é impossível, ou computacionalmente inviável num tempo razoável
 
-CADASTRADOR: tem permissão para:
+EDIT: tem permissão para:
 * alterar a própria senha 
 * cadastrar clientes novos
 * anterar clientes
 * deletar clientes 
 * procurar e visualizar  clientes 
 
-VISUALIZADOR:
+VIEW:
 * alterar a própria senha 
 * procurar e visualizar  clientes 
 
 
 ## Serviço de login
+
+Para acessar os serviços que requerem autorizações de acesso é necessário, inicialmente, adquirir um token fornecendo login e senha para o serviço:
+
+/auth/{login}/{senha}
+
+Será devolvido um token, que deve ser incluido no Header das requisições.
 
 
 ## Serviços de inclusão 
