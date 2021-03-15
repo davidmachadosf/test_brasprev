@@ -18,7 +18,6 @@ import br.com.davidmachadosf.test_brasprev.interceptor.annotation.RolesAutorizad
 import br.com.davidmachadosf.test_brasprev.model.enums.RoleType;
 import br.com.davidmachadosf.test_brasprev.service.utils.SenhaUtil;
 import br.com.davidmachadosf.test_brasprev.service.utils.SenhaUtilService;
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 public class TokenInterceptor implements HandlerInterceptor {
@@ -33,7 +32,12 @@ public class TokenInterceptor implements HandlerInterceptor {
     	boolean autorizado = true;
     	StringBuilder proc = new StringBuilder();
     	
-        final RolesAutorizados rolesAutorizados = ((HandlerMethod)handler).getMethod().getAnnotation((RolesAutorizados.class));
+    	System.out.println("handler("+handler.getClass().descriptorString()+")->");
+        proc.append("handler("+handler.getClass().descriptorString()+")->");
+        
+        if(!(handler instanceof HandlerMethod)) return true;
+    	
+    	final RolesAutorizados rolesAutorizados = ((HandlerMethod)handler).getMethod().getAnnotation((RolesAutorizados.class));
 
         // se tem a anotation, processa!
         if(rolesAutorizados != null){
@@ -53,20 +57,6 @@ public class TokenInterceptor implements HandlerInterceptor {
         	autorizado = service.verificaToken(token, callerRoles, loginParam);
         }
 
-		/*
-		 * if (token == null){ response.addHeader(HEADER_KEY_INTERCEPTOR,
-		 * "Token não enviado"); log.info("Authorization não enviado.");
-		 * log.info("Validação NOK."); return false; }
-		 */
-        
-        // comentar para processar as requisições normais
-		/*
-		 * else if (token.equals("teste")) { response.addHeader(HEADER_KEY_INTERCEPTOR,
-		 * "Token OK"); log.info("Validação OK."); return true; } else {
-		 * response.addHeader(HEADER_KEY_INTERCEPTOR, "Token NOK");
-		 * log.info("Validação NOK."); //return false; }
-		 */
-        
         proc.append(autorizado);
         response.addHeader(HEADER_KEY_INTERCEPTOR, proc.toString());
         return autorizado;
