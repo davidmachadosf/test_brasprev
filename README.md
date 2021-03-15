@@ -93,14 +93,48 @@ As autorizações de acesso que podem ser atribuidas aos usuários são os segui
 
 ## Serviço de obtenção de token
 
-Para acessar os serviços que requerem autorizações de acesso é necessário, inicialmente, adquirir um token fornecendo login e senha para o serviço (trocando *login* e *senha* na URL abaixo pelo login e senha do usuário):
+Para acessar os serviços que requerem autorizações de acesso é necessário, inicialmente, adquirir um token fornecendo login e senha para o serviço (trocando *login* e *senha* na URI abaixo pelo login e senha do usuário):
 
-https://test-brasprev.herokuapp.com/auth/login/senha
+* `GET` https://test-brasprev.herokuapp.com/auth/LOGIN_DO_USUARIO/SENHA
 
-Será devolvido um token, que deve ser incluido no Header das requisições. Isto será explicado posteriormente, nas instruções de como testar a API Rest da aplicação.
+Será devolvido um token, que deve ser incluido no Header das requisições. Isto será explicado posteriormente, nas instruções de como testar a API Rest da aplicação:
+```
+{
+  "Token": "zgb6FNPeClwKodkIuIRoQvCDVxaC2v0JCysTC6fIlk9/FCvrh7Z8pkkPXIlg4YFf"
+}
+```
 
 
 ## Serviços de alteração e verificação de senhas
+
+Deve ser feita uma requisição com o método **PATCH** para anteração de senha. Usuários com autorização de ``ADMIN`` podem alterar a senha de qualquer usuário. Usuários sem o perfil de ``ADMIN`` só podem alterar suas próprias senhas. Dada a natureza do armazenamento das senhas como um *hash* adicionado a um *salt* randômico, a única maneira de se recuperar uma senha esquecida é um usuário com perfil ``ADMIN`` inicialmente redefinindo a senha do usuário com alguma conhecida e este, posteriormente, obter um token com esta senha e alterá-la como desejar. A seguinte chamada é um exemplo de redifição de senha do usuário *edit01*:
+
+* `POST` https://test-brasprev.herokuapp.com/alterasenha/edit01/abretesézamo
+
+Também existe um serviço para checar a senha de um usuário, util na fase de desenvolvimento. Este é um exemplo de senha validada corretamente:
+
+* `GET` https://test-brasprev.herokuapp.com/verificasenha/edit01/abretesézamo
+```
+true
+```
+
+Exemplo de senha incorreta:
+
+* `GET` https://test-brasprev.herokuapp.com/verificasenha/edit01/abracadabra
+```
+true
+```
+
+
+Exemplo de validação de senha de um usuário inexistente no sistema:
+
+* `GET` https://test-brasprev.herokuapp.com/verificasenha/ninguem/xxxxxxx
+```
+Usuário Inexistente!
+```
+
+ 
+
 
 
 ## Serviços de criação/substituição
@@ -109,7 +143,6 @@ Inclusão ou substituição de registros, baseados nas respectivas chaves primá
 
 `usuarios`
 * `POST` https://test-brasprev.herokuapp.com/usuarios
-Passando o body:
 ```
 {
     "login": "ze001",
@@ -120,7 +153,6 @@ Passando o body:
 
 `clientes`
 * `POST` https://test-brasprev.herokuapp.com/clientes
-Passando o body:
 ```
 {
     "cpf": "00000000015",
@@ -139,7 +171,6 @@ Alterações em registros que não sejam chaves primárias são feitas com uma c
 
 `usuarios`
 * `PATCH` https://test-brasprev.herokuapp.com/usuarios/LOGIN_DO_USUARIO
-Passando o body:
 ```
 {
     "roles": "ADMIN,VIEW"
@@ -148,7 +179,6 @@ Passando o body:
 
 `clientes`
 * `PATCH` https://test-brasprev.herokuapp.com/clientes/CPF_DO_CLIENTE
-Passando o body:
 ```
 {
     "bairro": "Morro do Macaco",
@@ -159,7 +189,7 @@ Passando o body:
 
 ## Serviços de remoção de registros
 
-Remoção desão feitas com uma chamada REST utilizando o método **DEL**. A chave primária do registro a ser deletado é passada na URI de chamada.  
+Remoções de registros são feitas com uma chamada REST utilizando o método **DEL**. A chave primária do registro a ser deletado é passada na URI de chamada.  
 
 `usuarios`
 * `DEL` https://test-brasprev.herokuapp.com/usuarios/LOGIN_DO_USUARIO
@@ -171,17 +201,47 @@ Remoção desão feitas com uma chamada REST utilizando o método **DEL**. A cha
 ## Serviços de busca
 Alguns dos métodos de pesquisa comuns à interface JPA foram expostos como serviços rest. Podemos obter uma listagem de todos os métodops de busca expostos pela chamada:
 
-http://localhost:8080/clientes/search
+>* http://localhost:8080/clientes/search - para busca de usuários
+>* http://localhost:8080/clientes/search - para busca de clientes
 
-Assim estão disponíveis as seguintes buscas de cliente:
+Estão disponíveis as seguintes buscas de usuários:
 
-* 1
+>Consulta usuários pelo login
+>* ``GET``  https://test-brasprev.herokuapp.com/usuarios/search/getByLogin?login=admin
 
-* 2
+Consulta usuários por autorização de acesso
+* ``GET``  https://test-brasprev.herokuapp.com/usuarios/search/findByRolesContainingIgnoreCase?role=view
 
-* 3
+Estão disponíveis as seguintes buscas de clientes:
+
+>Consulta cliente pelo CPF
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/00000000005
+
+>Consulta nome pelo CPF
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/search/findNomeByCpf?cpf=00000000003
+
+>Consulta clientes homônimos pelo nome
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/search/findByNomeIgnoreCase?nome=chica
+
+>Consulta clientes por parte do nome
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/search/findByNomeContainingIgnoreCaseOrderByNome?busca=zé
+
+>Consulta clientes por parte do logradouro
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/search/findByLogradouroContainingIgnoreCaseOrderByLogradouro?busca=30
+
+>Consulta clientes por parte do bairro
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/search/findByBairroContainingIgnoreCaseOrderByBairro?busca=vila
+
+>Consulta clientes por parte da cidade
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/search/findByCidadeContainingIgnoreCaseOrderByCidade?busca=au
+
+>Consulta clientes por estado
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/search/findByEstadoIgnoreCase?uf=am
+
+>Consulta clientes por CEP
+>* ``GET``  https://test-brasprev.herokuapp.com/clientes/search/findByCep?cep=05000-002
 
 
-:metal:
+## Instruções para teste no Postman
 
 
