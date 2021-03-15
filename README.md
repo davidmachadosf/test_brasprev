@@ -89,41 +89,81 @@ As autorizações de acesso que podem ser atribuidas aos usuários são os segui
 
 
 
-## Serviço de login
+## Serviço de obtenção de token
 
-Para acessar os serviços que requerem autorizações de acesso é necessário, inicialmente, adquirir um token fornecendo login e senha para o serviço:
+Para acessar os serviços que requerem autorizações de acesso é necessário, inicialmente, adquirir um token fornecendo login e senha para o serviço (trocando *login* e *senha* na URL abaixo pelo login e senha do usuário):
 
-/auth/{login}/{senha}
+https://test-brasprev.herokuapp.com/auth/login/senha
 
-Será devolvido um token, que deve ser incluido no Header das requisições.
-
-
-## Serviços de inclusão 
-
-### usuarios
-  * post (login, senha, roles)
-
-### clientes
-   * post (cpf,nome, endereço(log, bairro,cidade, estado cep))
-
-## Serviços de alteração
-
-### usuarios
-  * senha: post (login, senha)
-  
-  * autorizações (roles) de acesso: post (login, roles)
-
-### clientes
-  * post (cpf,nome, endereço(log, bairro,cidade, estado cep))  
+Será devolvido um token, que deve ser incluido no Header das requisições. Isto será explicado posteriormente, nas instruções de como testar a API Rest da aplicação.
 
 
-## Serviços de remoção
+## Serviços de alteração e verificação de senhas
 
-### usuarios
-  * remove(login) CHECAR SE NÂO É O PRÓPRIO ADMIN
 
-### clientes
-  * remove(cpf)
+## Serviços de criação/substituição
+
+Inclusão ou substituição de registros, baseados nas respectivas chaves primárias de cada entidade, são feitas com uma chamada REST utilizando o método **POST**. Deve ser preenchido no *body* da chamada uma estrutura json com os dados a serem inseridos ou substituidos. Esta operação substitui integralmente todos os campos, e campos não fornecidos na requisição são enviados como *NULL*.   
+
+`usuarios`
+* `POST` https://test-brasprev.herokuapp.com/usuarios
+Passando o body:
+```
+{
+    "login": "ze001",
+    "roles": "EDIT,VIEW",
+    "hash": "12121212"
+}
+```
+
+`clientes`
+* `POST` https://test-brasprev.herokuapp.com/clientes
+Passando o body:
+```
+{
+    "cpf": "00000000015",
+    "nome": "Zé 0555",
+    "logradouro": "Rua Comprida, 300000",
+    "bairro": "Vila Sézamo",
+    "cidade": "Taubaté",
+    "estado": "SP",
+    "cep": "05000-002"
+}    
+```
+
+## Serviços de alteração de campos
+
+Alterações em registros que não sejam chaves primárias são feitas com uma chamada REST utilizando o método **PATCH**. Deve ser preenchido no *body* da chamada uma estrutura json com os dados a serem alterados e informado na URI a chave primária do registro. Neste caso não há necessidade de enviar todos os campos: campos que não forem fornecidos na estrutura não serão alterados.   
+
+`usuarios`
+* `PATCH` https://test-brasprev.herokuapp.com/usuarios/LOGIN_DO_USUARIO
+Passando o body:
+```
+{
+    "roles": "ADMIN,VIEW"
+}
+```
+
+`clientes`
+* `PATCH` https://test-brasprev.herokuapp.com/clientes/CPF_DO_CLIENTE
+Passando o body:
+```
+{
+    "bairro": "Morro do Macaco",
+    "cidade": "Pindamonhangaba",
+    "cep": "04900-002"
+} 
+```
+
+## Serviços de remoção de registros
+
+Remoção desão feitas com uma chamada REST utilizando o método **DEL**. A chave primária do registro a ser deletado é passada na URI de chamada.  
+
+`usuarios`
+* `DEL` https://test-brasprev.herokuapp.com/usuarios/LOGIN_DO_USUARIO
+
+`clientes`
+* `DEL` https://test-brasprev.herokuapp.com/clientes/CPF_DO_CLIENTE
 
 
 ## Serviços de busca
