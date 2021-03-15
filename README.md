@@ -38,7 +38,7 @@ Utilizou-se uma base de dados PostGres também hospedada na plataforma Heroku, c
 
 Neste exemplo simples a base de dados é composta de apenas duas tabelas: 
 
-### tb01_usuarios: 
+`tb01_usuarios` 
 
 Login (chave primária) dos usuários cadastrados no sistema, bem como o hash de suas senhas (as senhas não são armazenada como texto legível na base) e uma lista de Autorizações (Roles) de cada usuário, que controla quais os serviços ele pode acessar. A estrutura desta tabela é a seguinte:
 
@@ -48,7 +48,7 @@ login | VARCHAR( 10) | PRIMARY KEY
 roles | VARCHAR( 50) |
 hash  | VARCHAR(255) |
 
-### tb02_clientes: 
+`tb02_clientes`
 
 Clientes cadastrados no sistema pelos usuários habilitados para isto (com Role=EDIT, vide item seguinte), com número de CPF (chave primária), nome e dados de endereço composto de logradouro, bairro, cidade, estado (sigla) e CEP. A estrutura desta tabela na base é a seguinte:
 
