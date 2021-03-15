@@ -1,5 +1,8 @@
 package br.com.davidmachadosf.test_brasprev.controller;
 
+
+import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.APP_VERSAO;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,7 +19,7 @@ public class IndexController {
 	@GetMapping
 	@RequestMapping(value ="/hello")
 	public String hello() {
-    	return "Hello world!! I'm the Brasprev Java Test by David Machado Santos Filho (davidmachadosf@gmail.com).";
+    	return "Hello world!! I'm the Brasprev Java Test "+APP_VERSAO+" by David Machado Santos Filho (davidmachadosf@gmail.com).";
 	}
 	
 	@GetMapping
@@ -30,18 +33,18 @@ public class IndexController {
 	@RequestMapping(value ="/now")
 	public String now() {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		return formatter.format(new Date());
+		return formatter.format("Datetime on appserver is: "+ new Date());
 	}
 	
 	@GetMapping
 	@RequestMapping(value ="/add")
-	public Long add(@PathParam("a") Long a, @PathParam("b") Long b) {
-    	return a+b;
+	public String add(@PathParam("a") Long a, @PathParam("b") Long b) {
+    	return a+"+"+b+"="+(a+b);
 	}
 	
 	@GetMapping
 	@RequestMapping(value ="/mult")
-	public Long mult(@PathParam("a") Long a, @PathParam("b") Long b) {
-    	return a*b;
+	public String mult(@PathParam("a") Long a, @PathParam("b") Long b) {
+    	return a+"x"+b+"="+(a*b);
 	}
 }

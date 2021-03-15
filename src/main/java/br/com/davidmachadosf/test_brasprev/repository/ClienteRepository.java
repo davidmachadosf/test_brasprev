@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import br.com.davidmachadosf.test_brasprev.model.Cliente;
 
-
 @Repository
 @RepositoryRestResource(collectionResourceRel = "clientes", path = "clientes")
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, String> {

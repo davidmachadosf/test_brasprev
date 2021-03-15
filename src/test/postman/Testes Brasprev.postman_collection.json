@@ -507,13 +507,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/auth/edirt01/estouchutandoumasenha",
+							"raw": "{{host}}/auth/edit01/estouchutandoumasenha",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"auth",
-								"edirt01",
+								"edit01",
 								"estouchutandoumasenha"
 							]
 						}
