@@ -59,6 +59,9 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         proc.append(autorizado);
         response.addHeader(HEADER_KEY_INTERCEPTOR, proc.toString());
+        
+        System.out.	println(proc.toString());
+        
         return autorizado;
     }
 

@@ -1,7 +1,6 @@
 
-# Teste Brasprev (v1.0.0)
+# Teste Brasprev (v1.0.1)
 
-![Em construção](emConstrucao.gif)
 
 ## Código Fonte (GitHub)
 
@@ -95,7 +94,7 @@ As autorizações de acesso que podem ser atribuidas aos usuários são os segui
 
 Para acessar os serviços que requerem autorizações de acesso é necessário, inicialmente, adquirir um token fornecendo login e senha para o serviço (trocando *login* e *senha* na URI abaixo pelo login e senha do usuário):
 
-* `GET` https://test-brasprev.herokuapp.com/auth/LOGIN_DO_USUARIO/SENHA
+>* `GET` https://test-brasprev.herokuapp.com/auth/LOGIN_DO_USUARIO/SENHA
 
 Será devolvido um token, que deve ser incluido no Header das requisições. Isto será explicado posteriormente, nas instruções de como testar a API Rest da aplicação:
 ```
@@ -109,26 +108,26 @@ Será devolvido um token, que deve ser incluido no Header das requisições. Ist
 
 Deve ser feita uma requisição com o método **PATCH** para anteração de senha. Usuários com autorização de ``ADMIN`` podem alterar a senha de qualquer usuário. Usuários sem o perfil de ``ADMIN`` só podem alterar suas próprias senhas. Dada a natureza do armazenamento das senhas como um *hash* adicionado a um *salt* randômico, a única maneira de se recuperar uma senha esquecida é um usuário com perfil ``ADMIN`` inicialmente redefinindo a senha do usuário com alguma conhecida e este, posteriormente, obter um token com esta senha e alterá-la como desejar. A seguinte chamada é um exemplo de redifição de senha do usuário *edit01*:
 
-* `POST` https://test-brasprev.herokuapp.com/alterasenha/edit01/abretesézamo
+>* `POST` https://test-brasprev.herokuapp.com/alterasenha/edit01/abretesézamo
 
 Também existe um serviço para checar a senha de um usuário, util na fase de desenvolvimento. Este é um exemplo de senha validada corretamente:
 
-* `GET` https://test-brasprev.herokuapp.com/verificasenha/edit01/abretesézamo
+>* `GET` https://test-brasprev.herokuapp.com/verificasenha/edit01/abretesézamo
 ```
 true
 ```
 
 Exemplo de senha incorreta:
 
-* `GET` https://test-brasprev.herokuapp.com/verificasenha/edit01/abracadabra
+>* `GET` https://test-brasprev.herokuapp.com/verificasenha/edit01/abracadabra
 ```
-true
+false
 ```
 
 
 Exemplo de validação de senha de um usuário inexistente no sistema:
 
-* `GET` https://test-brasprev.herokuapp.com/verificasenha/ninguem/xxxxxxx
+>* `GET` https://test-brasprev.herokuapp.com/verificasenha/ninguem/xxxxxxx
 ```
 Usuário Inexistente!
 ```
@@ -142,7 +141,7 @@ Usuário Inexistente!
 Inclusão ou substituição de registros, baseados nas respectivas chaves primárias de cada entidade, são feitas com uma chamada REST utilizando o método **POST**. Deve ser preenchido no *body* da chamada uma estrutura json com os dados a serem inseridos ou substituidos. Esta operação substitui integralmente todos os campos, e campos não fornecidos na requisição são enviados como *NULL*.   
 
 `usuarios`
-* `POST` https://test-brasprev.herokuapp.com/usuarios
+>* `POST` https://test-brasprev.herokuapp.com/usuarios
 ```
 {
     "login": "ze001",
@@ -152,7 +151,7 @@ Inclusão ou substituição de registros, baseados nas respectivas chaves primá
 ```
 
 `clientes`
-* `POST` https://test-brasprev.herokuapp.com/clientes
+>* `POST` https://test-brasprev.herokuapp.com/clientes
 ```
 {
     "cpf": "00000000015",
@@ -170,7 +169,7 @@ Inclusão ou substituição de registros, baseados nas respectivas chaves primá
 Alterações em registros que não sejam chaves primárias são feitas com uma chamada REST utilizando o método **PATCH**. Deve ser preenchido no *body* da chamada uma estrutura json com os dados a serem alterados e informado na URI a chave primária do registro. Neste caso não há necessidade de enviar todos os campos: campos que não forem fornecidos na estrutura não serão alterados.   
 
 `usuarios`
-* `PATCH` https://test-brasprev.herokuapp.com/usuarios/LOGIN_DO_USUARIO
+>* `PATCH` https://test-brasprev.herokuapp.com/usuarios/LOGIN_DO_USUARIO
 ```
 {
     "roles": "ADMIN,VIEW"
@@ -178,7 +177,7 @@ Alterações em registros que não sejam chaves primárias são feitas com uma c
 ```
 
 `clientes`
-* `PATCH` https://test-brasprev.herokuapp.com/clientes/CPF_DO_CLIENTE
+>* `PATCH` https://test-brasprev.herokuapp.com/clientes/CPF_DO_CLIENTE
 ```
 {
     "bairro": "Morro do Macaco",
@@ -192,10 +191,10 @@ Alterações em registros que não sejam chaves primárias são feitas com uma c
 Remoções de registros são feitas com uma chamada REST utilizando o método **DEL**. A chave primária do registro a ser deletado é passada na URI de chamada.  
 
 `usuarios`
-* `DEL` https://test-brasprev.herokuapp.com/usuarios/LOGIN_DO_USUARIO
+>* `DEL` https://test-brasprev.herokuapp.com/usuarios/LOGIN_DO_USUARIO
 
 `clientes`
-* `DEL` https://test-brasprev.herokuapp.com/clientes/CPF_DO_CLIENTE
+>* `DEL` https://test-brasprev.herokuapp.com/clientes/CPF_DO_CLIENTE
 
 
 ## Serviços de busca
@@ -204,13 +203,15 @@ Alguns dos métodos de pesquisa comuns à interface JPA foram expostos como serv
 >* http://localhost:8080/clientes/search - para busca de usuários
 >* http://localhost:8080/clientes/search - para busca de clientes
 
+**OBS.:** *como todas são requisições usando o método* ``GET`` *elas bodem ser testadas normalmente em qualquer browser, não há necessidade de ferramentas específicas como o Postman nestes casos.* 
+
 Estão disponíveis as seguintes buscas de usuários:
 
 >Consulta usuários pelo login
 >* ``GET``  https://test-brasprev.herokuapp.com/usuarios/search/getByLogin?login=admin
 
-Consulta usuários por autorização de acesso
-* ``GET``  https://test-brasprev.herokuapp.com/usuarios/search/findByRolesContainingIgnoreCase?role=view
+>Consulta usuários por autorização de acesso
+>* ``GET``  https://test-brasprev.herokuapp.com/usuarios/search/findByRolesContainingIgnoreCase?role=view
 
 Estão disponíveis as seguintes buscas de clientes:
 
@@ -244,4 +245,24 @@ Estão disponíveis as seguintes buscas de clientes:
 
 ## Instruções para teste no Postman
 
+* Baixar o arquivo [Testes Brasprev.postman_collection.json](https://github.com/davidmachadosf/test_brasprev/blob/master/src/test/postman/Testes%20Brasprev.postman_collection.json) e importar como uma colection do Postman:
 
+![Imagem 1](Clipboard-1.jpg)
+
+* Criar um ambiente "Heroku" e setar nele a variável **host** com o valor *https://test-brasprev.herokuapp.com*:
+
+![Imagem 2](Clipboard-2.jpg)
+
+* Obter um token para conseguir utilizar os serviços. Para testes foi criado o usuário *god* de senha *abracadabra* com acesso irrestrito a todos os serviços da aplicação:
+
+![Imagem 3](Clipboard-3.jpg)
+
+* Abrir a aba da colection *Testes Brasprev*. Na área de *Authorization*, escolher o type **API Key** e inserir o token recebido no passo anterior. Este token será enviado em todas as requisições da collection, e expira em 2h30.
+
+![Imagem 4](Clipboard-4.jpg)
+
+* As principais consultas, updates e remoções estão pré-conficuradas na collection, separadas por pastas. Escolha o request alterando os parâmetros conforme o teste que se deseja efetuar:
+
+![Imagem 5](Clipboard-5.jpg)
+ 
+ 
