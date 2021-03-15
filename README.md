@@ -1,74 +1,92 @@
 
-# Teste Brasprev (OBS.: este documento ainda está sendo desenvolvido!)
+# Teste Brasprev (OBS.: documento ainda em desenvolvimento!)
 
-## Código Fonte
-O código fonte da aplicação está disponibilizada no GitHub pelo link: 
+## Código Fonte (GitHub)
 
+O código fonte da aplicação foi disponibilizado no GitHub pelo link: 
 
 https://github.com/davidmachadosf/test_brasprev.git
 
+## Deploy (Heroku)
 
-
-## Deploy
-Foi configurada para que commit novo na branch master seja automaticamente publicada na plataforma Heroku, na qual a aplicação pode ser acessada pela url:
+Configurou-se o github para que tono novo commit na branch master automaticamente publice a versão recente da aplicação na plataforma Heroku. A homepage web da aplicação, uma página simples para conferência dos dados gravados na base de dados, pode ser acessada pela url:
 
 https://test-brasprev.herokuapp.com/
 
-## Checagem de status
-Uma verificação inicial no status da aplicação pode ser checada consultando os seguintes links gerados automaticamente pela ferramenta actuator:
+## Checagem de status (Actuator)
 
+Pde ser feita uma checagem básica do status da aplicação pelos seguintes endpoints gerados pela ferramenta *Actuator*:
 
-https://test-brasprev.herokuapp.com/actuator/health
+https://test-brasprev.herokuapp.com/actuator/health - verifica se a aplicação iniciou sem problemas
 
-https://test-brasprev.herokuapp.com/actuator/env
+https://test-brasprev.herokuapp.com/actuator/env - exibe todas as variáveis do ambiente onde se encontra a aplicação
 
 ## Auxílio de desenvolvimento
+
 Durante o desenvolvimento o conteúdo da base de dados pode ser verificado em:
 
-https://test-brasprev.herokuapp.com/showUsuarios
+https://test-brasprev.herokuapp.com/showUsuarios - exibe o conteúdo da tabesa de usuários do sistema
 
-https://test-brasprev.herokuapp.com/showClientes
+https://test-brasprev.herokuapp.com/showClientes - exibe conteúdo da tabela de clientes cadastrados
 
-Optou-se por não se colocar verificações de segurança nesta págida, o que pode ser feito posteriormente ou pode-se eliminar completamente tais páginas, que só são úteis na fase de desenvolvimento da aplicação.
+Optou-se por não se colocar verificações de segurança nesta página por ser apenas uma conferência de dados para a fase de desenvolvimento da aplicvação, Isto pode ser feito posteriormente ou pode-se eliminar completamente tais páginas, que só são úteis nesta fase.
 
 
 ## Base de Dados
 
-Decidiu-se por criar uma base de dados volátil, ou seja, ela é apagada e recriada após cada restart da aplicação, porém este comportamento pode ser facilmente alterado de necessário.
+Utilizou-se uma base de dados PostGres também hospedada na plataforma Heroku, como a aplicação. Decidiu-se por criar uma base de dados volátil, ou seja, ela é apagada e recriada após cada restart da aplicação, comportamento que pode ser facilmente alterado se necessário.
 
 Neste exemplo simples a base de dados é composta de apenas duas tabelas: 
 
 ### tb01_usuarios: 
-usuários cadastrados no sistema, bem como o hash de suas senhas de acesso (a senha nunca é armazenada como texto legível na base) e um indicador dos papéis (roles) e permissões atribuidos ao usuário
 
-a estrutura desta tabela na base é a seguinte:
+Login (chave primária) dos usuários cadastrados no sistema, bem como o hash de suas senhas (as senhas não são armazenada como texto legível na base) e uma lista de Autorizações (Roles) de cada usuário, que controla quais os serviços ele pode acessar. A estrutura desta tabela é a seguinte:
+
+campo | tipo | chave 
+----- | ---- | ------
+login | VARCHAR( 10) | PRIMARY KEY
+roles | VARCHAR( 50) |
+hash  | VARCHAR(255) |
 
 ### tb02_clientes: 
-clientes cadastrados no sistema pelos usuários habilitados para isto, con numero de cpf, nome e dados de endereço.
 
-a estrutura desta tabela na base é a seguinte:
+Clientes cadastrados no sistema pelos usuários habilitados para isto (com Role=EDIT, vide item seguinte), com número de CPF (chave primária), nome e dados de endereço composto de logradouro, bairro, cidade, estado (sigla) e CEP. A estrutura desta tabela na base é a seguinte:
+
+campo | tipo | chave 
+----- | ---- | ------
+cpf        | VARCHAR(11) | PRIMARY KEY
+nome       | VARCHAR(50) |
+logradouro | VARCHAR(50) |
+bairro     | VARCHAR(50) |
+cidade     | VARCHAR(50) |
+estado     | VARCHAR( 2) |
+cep        | VARCHAR( 9) |
 
 
 ## Autorizações de acesso aos serviços
-Os niveis de acesso que podem ser atribuitos aos usuários são os seguintes:
 
-ADMIN: tem permissão para:
+As autorizações de acesso que podem ser atribuidas aos usuários são os seguintes:
+
+`ADMIN` tem permissão para:
 * cadastrar usuários novos
 * alterar a senha de qualquer usuário (incluindo sua própria)
-* alterar nome e niveis de acesso de usuários
+* alterar nome e autorizações de acess de acesso de usuários
 * deletar usuários
-OBS:como a senha nunca é gravada na base, o reset de senhas pode ser feito fornecendo uma senha nova ou deixando o sistema gerar uma aleatoria: recuperar uma senha esquecida é impossível, ou computacionalmente inviável num tempo razoável
+* procurar e visualizar usuarios
 
-EDIT: tem permissão para:
+`EDIT` tem permissão para:
 * alterar a própria senha 
 * cadastrar clientes novos
-* anterar clientes
+* alterar dados clientes
 * deletar clientes 
-* procurar e visualizar  clientes 
 
-VIEW:
+`VIEW` tem permissão para:
 * alterar a própria senha 
 * procurar e visualizar  clientes 
+
+`OWNER` tem permissão para:
+* indica que usuário só pode acessar o serviço se estiver alterando seus próprios dados
+
 
 
 ## Serviço de login
