@@ -32,8 +32,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     	boolean autorizado = true;
     	StringBuilder proc = new StringBuilder();
     	
-    	System.out.println("handler("+handler.getClass().descriptorString()+")->");
-        proc.append("handler("+handler.getClass().descriptorString()+")->");
+    	proc.append("handler("+handler.getClass().getName()+")->");
         
         if(!(handler instanceof HandlerMethod)) return true;
     	
