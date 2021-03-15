@@ -33,7 +33,7 @@ public class IndexController {
 	@RequestMapping(value ="/now")
 	public String now() {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		return formatter.format("Datetime on appserver is: "+ new Date());
+		return "Datetime on appserver is: "+ formatter.format(new Date());
 	}
 	
 	@GetMapping

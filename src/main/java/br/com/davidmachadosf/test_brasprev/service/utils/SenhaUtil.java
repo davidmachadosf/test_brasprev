@@ -3,10 +3,12 @@ package br.com.davidmachadosf.test_brasprev.service.utils;
 import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.BASE64_CHARSET;
 import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.CHAVE_CRIPTOGRAFIA;
 import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.EXPIRES_DURATION;
+import static br.com.davidmachadosf.test_brasprev.model.enums.RoleType.OWNER;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -19,10 +21,9 @@ import br.com.davidmachadosf.test_brasprev.model.enums.RoleType;
 import br.com.davidmachadosf.test_brasprev.repository.UsuarioRepository;
 
 public class SenhaUtil {
-	
 
 	// gera token de autenticação com data de expiração
-	public String geraToken(String login, String senha) throws Exception{		
+	public static String geraToken(String login, String senha) throws Exception{		
 		long agora = (new Date()).getTime();
 		return 
 		"{\n  \"Token\": \"" +
@@ -33,7 +34,7 @@ public class SenhaUtil {
 		"\"\n}";
 	}
 
-	public void verificaToken(String token, UsuarioRepository repository, List<String> callerRoles, String loginParam) throws Exception {		
+	public static void verificaToken(String token, UsuarioRepository repository, List<RoleType> callerRoles, String loginParam) throws Exception {		
 		
 		String authString = decrypt(token, CHAVE_CRIPTOGRAFIA);
 		
@@ -51,7 +52,7 @@ public class SenhaUtil {
 		try{
 			Usuario usuario = repository.getByLogin(login);
 		    String hashAtual = usuario.getHash();
-	        String[]roles = usuario.getRoles().split(",");
+	        List<String> userRoles = Arrays.asList(usuario.getRoles().split(","));
 	        
 	        // verifica se senha fornecida está correta
 	        if(!verificaSenha(hashAtual, senha)) {
@@ -59,10 +60,12 @@ public class SenhaUtil {
 			}
 	        
 	        // uma das exigências do serviço é que o usuário só possa mudar dados dele próprio? (ex.: troca de senha)
-	        if(callerRoles.contains(RoleType.OWNER.toString()) && loginParam.equals(login)) return;
+	        if(callerRoles.contains(OWNER) && null!=loginParam && login.equals(loginParam)) return;
 	       
 	        // papel do usuário está na lista de papéis que podem acessar o serviço?
-	        for(String role:roles) {
+	        RoleType role;
+	        for(String roleString:userRoles) {
+	        	role = RoleType.valueOf(roleString.trim().toUpperCase());
 	        	if(callerRoles.contains(role)) return;
 	        }
 	        
@@ -76,13 +79,13 @@ public class SenhaUtil {
 	
 	
 	// verifica se senha fornecida gera mesmo hash que o armazenado na base
-	public boolean verificaSenha(String hashAtual, String senha) {		
+	public static boolean verificaSenha(String hashAtual, String senha) {		
 		byte[]salt = decodeBase64(hashAtual.split(":")[0]);		
 		return hashAtual.equals(geraHashComSaltParaSenha(salt,senha));
 	}
 	
 	// cria um novo hash de salt aleatório a partir da senha fornacida
-	public String geraHashNovoParaSenha(String senha) {
+	public static String geraHashNovoParaSenha(String senha) {
 		SecureRandom random = new SecureRandom();
 		byte[] salt = new byte[16];
 		random.nextBytes(salt);
@@ -92,7 +95,7 @@ public class SenhaUtil {
     // cria um hash para a senha aberta acresentando um salt aleatório a ela;
 	// isto faz com que uma mesma senha gere hashs aleatórios diferentes, o que
 	// dificulta muito a tentativa de descobri-la por ataques de brute force
-	private String geraHashComSaltParaSenha(byte[] salt, String senha) {
+	private static String geraHashComSaltParaSenha(byte[] salt, String senha) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			md.update(salt);
@@ -106,28 +109,28 @@ public class SenhaUtil {
 		return null;
 	}
 	
-	private String encodeBase64(byte[]bytes) {
+	private static String encodeBase64(byte[]bytes) {
 	   return Base64.getEncoder().encodeToString(bytes);
 	}
 	
-	private byte[] decodeBase64(String encodedString) {
+	private static byte[] decodeBase64(String encodedString) {
 	    return Base64.getDecoder().decode(encodedString);
 	}
 	
 	
-	private String encodeBase64String(String string) {
+	private static String encodeBase64String(String string) {
 	    byte[] bytes = string.getBytes(BASE64_CHARSET);
 	    return Base64.getEncoder().encodeToString(bytes);
 	}
 		
 	
-	private String decodeBase64String(String encodedString) {
+	private static String decodeBase64String(String encodedString) {
 		byte[] bytes = Base64.getDecoder().decode(encodedString);
 	    return  new String(bytes, BASE64_CHARSET);
 	}
 	
 	
-	public String encrypt(String strClearText,String strKey) throws Exception{
+	public static String encrypt(String strClearText,String strKey) throws Exception{
 		String strData="";
 		
 		try {
@@ -145,7 +148,7 @@ public class SenhaUtil {
 	}
 	
 
-	public String decrypt(String strEncrypted,String strKey) throws Exception{
+	public static String decrypt(String strEncrypted,String strKey) throws Exception{
 		String strData="";
 		
 		try {
@@ -160,6 +163,14 @@ public class SenhaUtil {
 			throw new Exception(e);
 		}
 		return strData;
+	}
+	
+	public static String rolesToString(List<RoleType> roles) {
+		StringBuilder sb = new StringBuilder();
+		for(RoleType role:roles) {
+			sb.append(role.name());
+		}
+		return sb.toString();
 	}
 
 }

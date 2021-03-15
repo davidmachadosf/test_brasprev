@@ -7,6 +7,19 @@ O código fonte da aplicação está disponibilizada no GitHub pelo link:
 
 https://github.com/davidmachadosf/test_brasprev.git
 
+
+## Critérios de Mudança de Versões
+As versões da aplicação são marcadas com X.Y.Z, sendo X, Y e Z inteiros sequenciais começando em zero (exceto por Z, que sempre começa em 1).
+
+Os incrementos em Z indicam alterações que não afetam os testes anteriores nas versões X.Y.(Z-n), onde n>=1. Podem ser inclusões de documentação, comentários em código, ou melhorias e verificações em tempo de execução que, mesmo que importantes, não afetam os testes nas versões anteriores, que continuam funcionando.
+
+Os incrementos em Y indicam alterações importantes na aplicação, principalmente correções de bugs. Aplicações de versões X.Y.Z e X.(Y-1).* onde n>=1 se comportarão diferentes se os casos de teste utilizados estiverem relacionados ao bug corrigido. Mas não representam mudanças estruturais muito profundas na arquitetura da aplicação.
+
+Os incrementos em X indicam alterações MUITO importantes na aplicação, inclusive com incompatibilidade de testes em relação às versões (x-n).*.* onde onde n>=1... São incrementos importantes no projeto, como inclusão de recursos de criptografia, autenticação, incremento de domínios (tabelas a mais a serem administradas), etc... 
+
+Mas vale notar que no início do desenvolvimento, antes de ser apresentada a versão inicial 1.0.0, estas evoluções podem ocorrer ligeiramente mais lentas que esta proposta acima. Ou seja, embora alterações importantes possam acontecer entre as versões 0.2.* e 0.3.*, na versão X=0 elas ainda podem ser consideradas como desenvolvimento incompleto, e provavelmente são alterações mais importantes que aquelas sugeridas acima.
+
+
 ## Deploy
 Foi configurada para que commit novo na branch master seja automaticamente publicada na plataforma Heroku, na qual a aplicação pode ser acessada pela url:
 

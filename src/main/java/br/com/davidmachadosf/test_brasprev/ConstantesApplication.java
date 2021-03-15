@@ -20,6 +20,6 @@ public class ConstantesApplication {
    	public static String CHAVE_CRIPTOGRAFIA = "secret$key";
    	
    	// atributos de header
-   	public static String TOKEN_READER_KEY = "Token";
-   	public static String INTERCEPTOR_HEADER_KEY = "Interceptor";
+   	public static String HEADER_KEY_TOKEN = "Token";
+   	public static String HEADER_KEY_INTERCEPTOR = "Interceptor";
 }

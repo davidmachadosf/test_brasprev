@@ -5,12 +5,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import br.com.davidmachadosf.test_brasprev.model.enums.ValidationType;
+import br.com.davidmachadosf.test_brasprev.model.enums.RoleType;
 
 @Target( ElementType.METHOD )
 @Retention( RetentionPolicy.RUNTIME)
 public @interface RolesAutorizados {
 
-    ValidationType validationType() default ValidationType.ANNONYMOUS;
+    RoleType[] value();
 
 }

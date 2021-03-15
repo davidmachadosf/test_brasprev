@@ -1,9 +1,7 @@
 br\com\davidmachadosf\test_brasprev\repository\ClienteRepository.class
 br\com\davidmachadosf\test_brasprev\interceptor\TokenInterceptor.class
 br\com\davidmachadosf\test_brasprev\service\utils\SenhaUtil.class
-br\com\davidmachadosf\test_brasprev\model\enums\ValidationType.class
 br\com\davidmachadosf\test_brasprev\model\Usuario.class
-br\com\davidmachadosf\test_brasprev\service\utils\SenhaUtilServices.class
 br\com\davidmachadosf\test_brasprev\interceptor\annotation\RolesAutorizados.class
 br\com\davidmachadosf\test_brasprev\interceptor\config\ConfigInterceptor.class
 br\com\davidmachadosf\test_brasprev\controller\CadastroController.class
@@ -16,4 +14,5 @@ br\com\davidmachadosf\test_brasprev\service\IUsuarioService.class
 br\com\davidmachadosf\test_brasprev\service\UsuarioService.class
 br\com\davidmachadosf\test_brasprev\service\IClienteService.class
 br\com\davidmachadosf\test_brasprev\service\ClienteService.class
+br\com\davidmachadosf\test_brasprev\service\utils\SenhaUtilService.class
 br\com\davidmachadosf\test_brasprev\controller\IndexController.class

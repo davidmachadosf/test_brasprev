@@ -16,7 +16,7 @@ public class UsuarioService implements IUsuarioService {
     @Autowired
     private UsuarioRepository repository;
     
-    @Override
+    @Override    
     public List<Usuario> findAll() {
         return (List<Usuario>) repository.findAll();
     }
