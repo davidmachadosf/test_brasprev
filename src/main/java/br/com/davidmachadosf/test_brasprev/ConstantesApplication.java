@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ConstantesApplication {
 	 
-	public static final String APP_VERSAO = "v1.1.0";
+	public static final String APP_VERSAO = "v1.1.1";
 	
     public static final Charset BASE64_CHARSET = StandardCharsets.UTF_8;
 	

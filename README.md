@@ -1,5 +1,5 @@
 
-# Teste Brasprev (v1.1.0)
+# Teste Brasprev (v1.1.1)
 
 
 ## Código Fonte (GitHub)
@@ -103,6 +103,30 @@ Será devolvido um token, que deve ser incluido no Header das requisições. Ist
 }
 ```
 
+Estão cadastrados inicialmente os seguintes usuários com as seguintes autorizações de acesso:
+
+campo | tipo | chave 
+----- | ---- | ------
+cpf        | VARCHAR(11) | PRIMARY KEY
+nome       | VARCHAR(50) |
+logradouro | VARCHAR(50) |
+
+
+Login  | Roles	
+------ | ------
+god    | ADMIN,EDIT,VIEW
+admin  | ADMIN
+edit01 | EDIT
+user01 | VIEW
+user02 | VIEW
+
+
+O hash inicialmente cadastrados para todos estes usuários corresponde à senha **abracadabra**.
+
+Foi criado um usuário de login **god** para testes de desenvolvimento, com permissão cadastrada para todas as Roles possíveis. Na prática, ele está autorizado a chamar tdos os serviços REST do sistema, se gerar um token de autenticação com seu login e senha. 
+
+Os tokens gerados expiram depois de 2 horas e 30 minutos, e depois deste período será necessário solicitar um novo token para continuar usando os serviços.
+
 
 ## Serviços de alteração e verificação de senhas
 
@@ -200,7 +224,7 @@ Remoções de registros são feitas com uma chamada REST utilizando o método **
 ## Serviços de busca
 Alguns dos métodos de pesquisa comuns à interface JPA foram expostos como serviços rest. Podemos obter uma listagem de todos os métodops de busca expostos pela chamada:
 
->* http://localhost:8080/clientes/search - para busca de usuários
+>* http://localhost:8080/usuarios/search - para busca de usuários
 >* http://localhost:8080/clientes/search - para busca de clientes
 
 **OBS.:** *como todas são requisições usando o método* ``GET`` *elas bodem ser testadas normalmente em qualquer browser, não há necessidade de ferramentas específicas como o Postman nestes casos.* 
