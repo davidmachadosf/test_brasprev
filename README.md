@@ -220,7 +220,7 @@ Alguns dos métodos de pesquisa comuns à interface JPA foram expostos como serv
 >* https://test-brasprev.herokuapp.com/usuarios/search - para busca de usuários
 >* https://test-brasprev.herokuapp.com/clientes/search - para busca de clientes
 
-**OBS.:** *como todas são requisições usando o método* ``GET`` *elas bodem ser testadas normalmente em qualquer browser, não há necessidade de ferramentas específicas como o Postman nestes casos.* 
+**OBS.:** *como todas são requisições usando o método* ``GET`` *elas podem ser testadas normalmente em qualquer browser, não há necessidade de ferramentas específicas como o Postman nestes casos.* 
 
 Estão disponíveis as seguintes buscas de usuários:
 
