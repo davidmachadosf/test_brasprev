@@ -105,13 +105,6 @@ Será devolvido um token, que deve ser incluido no Header das requisições. Ist
 
 Estão cadastrados inicialmente os seguintes usuários com as seguintes autorizações de acesso:
 
-campo | tipo | chave 
------ | ---- | ------
-cpf        | VARCHAR(11) | PRIMARY KEY
-nome       | VARCHAR(50) |
-logradouro | VARCHAR(50) |
-
-
 Login  | Roles	
 ------ | ------
 god    | ADMIN,EDIT,VIEW
