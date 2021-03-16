@@ -217,8 +217,8 @@ Remoções de registros são feitas com uma chamada REST utilizando o método **
 ## Serviços de busca
 Alguns dos métodos de pesquisa comuns à interface JPA foram expostos como serviços rest. Podemos obter uma listagem de todos os métodops de busca expostos pela chamada:
 
->* http://localhost:8080/usuarios/search - para busca de usuários
->* http://localhost:8080/clientes/search - para busca de clientes
+>* https://test-brasprev.herokuapp.com/usuarios/search - para busca de usuários
+>* https://test-brasprev.herokuapp.com/clientes/search - para busca de clientes
 
 **OBS.:** *como todas são requisições usando o método* ``GET`` *elas bodem ser testadas normalmente em qualquer browser, não há necessidade de ferramentas específicas como o Postman nestes casos.* 
 
