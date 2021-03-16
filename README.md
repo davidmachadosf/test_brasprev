@@ -278,7 +278,7 @@ Estão disponíveis as seguintes buscas de clientes:
 
 ![Imagem 4](Clipboard-4.jpg)
 
-* As principais consultas, updates e remoções estão pré-conficuradas na collection, separadas por pastas. Escolha o request alterando os parâmetros conforme o teste que se deseja efetuar:
+* As principais consultas, updates e remoções estão pré-configuradas na collection, separadas por pastas. Escolha o request alterando os parâmetros conforme o teste que se deseja efetuar:
 
 ![Imagem 5](Clipboard-5.jpg)
  
