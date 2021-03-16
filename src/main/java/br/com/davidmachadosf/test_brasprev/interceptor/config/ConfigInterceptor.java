@@ -11,7 +11,8 @@ import lombok.RequiredArgsConstructor;
 @SuppressWarnings("deprecation")
 @RequiredArgsConstructor
 @Component
-public class ConfigInterceptor extends WebMvcConfigurerAdapter {
+public class ConfigInterceptor 
+extends WebMvcConfigurerAdapter {
 
     private final TokenInterceptor inperceptor;
 
@@ -19,5 +20,7 @@ public class ConfigInterceptor extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(inperceptor);
     }
+    
+    
 
 }
