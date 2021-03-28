@@ -1,5 +1,9 @@
 package br.com.davidmachadosf.test_brasprev.controller;
 
+import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.APP_NOME;
+import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.APP_TITULO;
+import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.APP_VERSAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,13 @@ public class CadastroController {
     @Autowired
     private IClienteService clienteService;
 
+    @GetMapping("/database")
+    public String database(Model model) {
+    	model.addAttribute("titulo", APP_TITULO);
+    	model.addAttribute("nomeVersao", APP_NOME+" ("+APP_VERSAO+")");
+    	return "database";
+    }
+    
     @GetMapping("/showUsuarios")
     public String findUsuarios(Model model) {
     	model.addAttribute("usuarios", usuarioService.findAll());

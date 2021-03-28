@@ -1,6 +1,7 @@
 package br.com.davidmachadosf.test_brasprev.controller;
 
 
+import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.APP_NOME;
 import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.APP_VERSAO;
 
 import java.text.SimpleDateFormat;
@@ -19,7 +20,8 @@ public class IndexController {
 	@GetMapping
 	@RequestMapping(value ="/hello")
 	public String hello() {
-    	return "Hello world!! I'm the Brasprev Java Test "+APP_VERSAO+" by David Machado Santos Filho (davidmachadosf@gmail.com).";
+    	return "Hello world!! I am <"+APP_NOME+"> "+APP_VERSAO+
+    		   " by David Machado Santos Filho (davidmachadosf@gmail.com).";
 	}
 	
 	@GetMapping

@@ -1,5 +1,5 @@
 
-# Teste Brasprev (v1.1.1)
+# Teste Brasprev (v1.1.2)
 
 
 ## Código Fonte (GitHub)

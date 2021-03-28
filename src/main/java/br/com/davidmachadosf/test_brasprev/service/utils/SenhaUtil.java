@@ -168,7 +168,7 @@ public class SenhaUtil {
 	public static String rolesToString(List<RoleType> roles) {
 		StringBuilder sb = new StringBuilder();
 		for(RoleType role:roles) {
-			sb.append(role.name());
+			sb.append(role.name()+" ");
 		}
 		return sb.toString();
 	}

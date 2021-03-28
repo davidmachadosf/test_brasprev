@@ -3,7 +3,6 @@ import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.HEADER_K
 import static br.com.davidmachadosf.test_brasprev.ConstantesApplication.HEADER_KEY_TOKEN;
 import static br.com.davidmachadosf.test_brasprev.model.enums.RoleType.OWNER;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.client.ClientHttpRequestExecution;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -26,7 +21,7 @@ import br.com.davidmachadosf.test_brasprev.service.utils.SenhaUtilService;
 
 @Component
 public class TokenInterceptor 
-implements HandlerInterceptor, ClientHttpRequestInterceptor  {
+implements HandlerInterceptor {
 	
 	@Autowired
 	SenhaUtilService service;
@@ -40,6 +35,19 @@ implements HandlerInterceptor, ClientHttpRequestInterceptor  {
     	StringBuilder sb = new StringBuilder();
     	
     	sb.append("handler("+handler.getClass().getName()+")->");
+    	
+    	System.out.println(
+    		"\n***************************************"+
+    		"\n SCHEME: "+request.getScheme()+
+    		"\n METHOD: "+request.getMethod()+
+    	    "\n CONTEXT:"+request.getContextPath()+
+    	    "\n SERVCTX: "+request.getServletContext() +
+    	    "\n PATH:   "+request.getPathInfo()+
+    	    "\n REALPATH:"+request.getRealPath(request.getPathInfo())+
+    	    "\n SERVPATH:"+request.getServletPath()+
+    	    "\n QUERY:  "+request.getQueryString()+
+    		"\n HANDLER:"+handler.toString());
+    		
         
         if(!(handler instanceof HandlerMethod)) return true;
     	
@@ -50,6 +58,7 @@ implements HandlerInterceptor, ClientHttpRequestInterceptor  {
         	
         	List<RoleType> callerRoles = Arrays.asList(rolesAutorizados.value());
         	sb.append("RolesAutorizados("+SenhaUtil.rolesToString(callerRoles)+")->");
+        	System.out.println("ROLES: "+SenhaUtil.rolesToString(callerRoles));
         	
         	String token = request.getHeader(HEADER_KEY_TOKEN);
         	sb.append("token("+token+")->");
@@ -59,6 +68,7 @@ implements HandlerInterceptor, ClientHttpRequestInterceptor  {
         	if(callerRoles.contains(OWNER)) {
         		loginParam = extractLoginParam(request,sb);
             	sb.append("loginParam("+loginParam+")->");
+            	System.out.println("LOGIN: "+loginParam);
         	}
         	
         	// verifica se token dá autorização para acessar o serviço        	
@@ -68,7 +78,8 @@ implements HandlerInterceptor, ClientHttpRequestInterceptor  {
         sb.append(autorizado);
         response.addHeader(HEADER_KEY_INTERCEPTOR, sb.toString());
         
-        System.out.	println(sb.toString());
+        //System.out.	println(sb.toString());
+        System.out.println("AUTORIZADO: "+autorizado);
         
         return autorizado;
     }
@@ -106,13 +117,12 @@ implements HandlerInterceptor, ClientHttpRequestInterceptor  {
 		return loginParam;
 	}
     
-    @Override
-    public ClientHttpResponse intercept( HttpRequest request, byte[] body, ClientHttpRequestExecution execution) 
-    throws IOException {
- 
-        ClientHttpResponse response = execution.execute(request, body);
-        response.getHeaders().add("Foo", "bar");
-        return response;
-    }
+	/*
+	 * @Override public ClientHttpResponse intercept( HttpRequest request, byte[]
+	 * body, ClientHttpRequestExecution execution) throws IOException {
+	 * 
+	 * ClientHttpResponse response = execution.execute(request, body);
+	 * response.getHeaders().add("Foo", "bar"); return response; }
+	 */
 
 }

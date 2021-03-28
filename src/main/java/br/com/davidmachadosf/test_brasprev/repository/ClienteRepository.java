@@ -1,16 +1,19 @@
 package br.com.davidmachadosf.test_brasprev.repository;
 import static br.com.davidmachadosf.test_brasprev.model.enums.RoleType.VIEW;
+
 import java.util.List;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.stereotype.Repository;
 
 import br.com.davidmachadosf.test_brasprev.interceptor.annotation.RolesAutorizados;
 import br.com.davidmachadosf.test_brasprev.model.Cliente;
 
 @Repository
+@RepositoryRestController
 @RepositoryRestResource(collectionResourceRel = "clientes", path = "clientes")
 public interface ClienteRepository extends PagingAndSortingRepository<Cliente, String> {
 	
@@ -32,5 +35,5 @@ public interface ClienteRepository extends PagingAndSortingRepository<Cliente, S
 	List<Cliente> findByEstadoIgnoreCase(@Param("uf") String uf);
 	@RolesAutorizados({VIEW})
 	List<Cliente> findByCep(@Param("cep") String cep);
-
+	
 }

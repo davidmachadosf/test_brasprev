@@ -21,6 +21,4 @@ extends WebMvcConfigurerAdapter {
         registry.addInterceptor(inperceptor);
     }
     
-    
-
 }
